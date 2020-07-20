@@ -1,0 +1,6 @@
+2020-07-20 16:56:52.659[main] DEBUG com.o2o.dao.ShopDao.insertShop - ==>  Preparing: INSERT INTO tb_shop(owner_id,area_id,shop_category_id,shop_name,shop_desc,shop_addr, phone,shop_img,priority,create_time,last_edit_time,enable_status,advice) VALUES (?,?,?,?,?,?, ?,?,?,?,?,?,?)
+2020-07-20 16:56:52.737[main] DEBUG com.o2o.dao.ShopDao.insertShop - ==> Parameters: 1(Long), 2(Integer), 1(Long), 测试店铺1(String), test1(String), null, test1(String), test1(String), 1(Integer), 2020-07-20 16:56:51.549(Timestamp), 2020-07-20 16:56:51.549(Timestamp), 0(Integer), 审核中(String)
+2020-07-20 16:56:52.784[main] DEBUG com.o2o.dao.ShopDao.insertShop - <==    Updates: 1
+2020-07-20 16:56:53.112[main] DEBUG com.o2o.dao.ShopDao.updateShop - ==>  Preparing: update tb_shop SET shop_name=?, shop_desc=?, phone=?, shop_img=?, priority=?, last_edit_time=?, enable_status=?, advice=?, shop_category_id=? where shop_id=?
+2020-07-20 16:56:53.112[main] DEBUG com.o2o.dao.ShopDao.updateShop - ==> Parameters: 测试店铺1(String), test1(String), test1(String), \upload\item\shop7\2020072016565296653.png(String), 1(Integer), 2020-07-20 16:56:51.549(Timestamp), 0(Integer), 审核中(String), 1(Long), 7(Long)
+2020-07-20 16:56:53.128[main] DEBUG com.o2o.dao.ShopDao.updateShop - <==    Updates: 1

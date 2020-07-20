@@ -1,6 +1,5 @@
 package com.o2o.util;
 
-import com.sun.imageio.plugins.common.ImageUtil;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import org.slf4j.Logger;
@@ -14,11 +13,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-public class imageUtil {
+public class ImageUtil {
     private static String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
     private static final SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
     private static final Random r = new Random();
-    private static Logger logger = LoggerFactory.getLogger(ImageUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(com.sun.imageio.plugins.common.ImageUtil.class);
 
     public static File transferCommonsMultipartFileToFile(CommonsMultipartFile cFile){
         File newFile = new File(cFile.getOriginalFilename());
