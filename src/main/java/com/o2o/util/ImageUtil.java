@@ -37,7 +37,7 @@ public class ImageUtil {
     /*
      * 处理缩略图，并返回新生成的图片相对路径
      * */
-    public static String generateThumbnail(InputStream thumbnailInputStream, String fileName, String targetAddr) {
+    public static String generateThumbnail(InputStream thumbnailInputStream, String fileName, String targetAddr) throws IOException {
         String realFileName = getRandomFileName();
         String extension = getFileExtension(fileName);
         makeDirPath(targetAddr);
@@ -45,13 +45,9 @@ public class ImageUtil {
         logger.debug("current relativeAddr is" + relativeAddr);
         File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
         logger.debug("current complete addr is:" + PathUtil.getImgBasePath() + relativeAddr);
-        try {
-            Thumbnails.of(thumbnailInputStream).size(200, 200)
-                    .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "waterMark.png")), 0.25f)
-                    .outputQuality(0.8f).toFile(dest);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Thumbnails.of(thumbnailInputStream).size(200, 200)
+                .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "waterMark.png")), 0.25f)
+                .outputQuality(0.8f).toFile(dest);
         return relativeAddr;
     }
 

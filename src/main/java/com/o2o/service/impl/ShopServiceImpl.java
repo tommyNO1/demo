@@ -10,8 +10,9 @@ import com.o2o.util.ImageUtil;
 import com.o2o.util.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 
@@ -21,6 +22,7 @@ public class ShopServiceImpl implements ShopService {
     private ShopDao shopDao;
 
     @Override
+    @Transactional
     public ShopExecution addShop(Shop shop, InputStream shopImgInputStream, String fileName) {
         //空值判断
         if (shop == null) {
@@ -56,7 +58,7 @@ public class ShopServiceImpl implements ShopService {
         return new ShopExecution(ShopStateEnum.CHECK, shop);
     }
 
-    private void addShopImg(Shop shop, InputStream shopImgInputStream, String fileName) {
+    private void addShopImg(Shop shop, InputStream shopImgInputStream, String fileName) throws IOException {
         //获取shop图片目录的相对路径
         String dest = PathUtil.getShopImagePath(shop.getShopId());
         String shopImgAddr = ImageUtil.generateThumbnail(shopImgInputStream, fileName, dest);
