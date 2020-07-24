@@ -3,7 +3,7 @@
     <!--定义参数产量-->
     <property name="log.level" value="debug"/>
     <property name="log.maxHistory" value="30"/>
-    <property name="log.filePath" value="${catalina.base}/logs/webapps"/>
+    <property name="log.filePath" value="./target/logs/webapps"/>
     <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread] %-5level %logger{50} - %msg%n"/>
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
