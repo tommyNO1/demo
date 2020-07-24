@@ -12,21 +12,21 @@
 
     <!--配置springMVC-->
     <!--1.开启SpringMVC注解模式-->
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven/>
 
     <!--2.静态资源默认servlet配置
     （1）加入对静态资源的处理：js，gif，png
     （2）允许使用“/”做整体映射
     -->
-    <mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>
-    <mvc:default-servlet-handler></mvc:default-servlet-handler>
+    <mvc:resources mapping="/resources/**" location="./resources/"/>
+    <mvc:default-servlet-handler/>
 
     <!--3定义视图解析器-->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/html/"></property>
-        <property name="suffix" value=".html"></property>
+        <property name="prefix" value="/WEB-INF/html/"/>
+        <property name="suffix" value=".html"/>
     </bean>
     <!--4扫描web相关的bean-->
-    <context:component-scan base-package="com.o2o.web"></context:component-scan>
+    <context:component-scan base-package="com.o2o.web"/>
 </beans>
