@@ -1,0 +1,4 @@
+# Default ignored files
+.idea/
+# ignore target file
+target/
