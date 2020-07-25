@@ -2,8 +2,8 @@
 *
 * */
 $(function () {
-    var initUrl = '/demo/shopadmin/getshopinitinfo';
-    var registerShopUrl = '/demo/shopadmin/registershop'
+    var initUrl = '/shopadmin/getshopinitinfo';
+    var registerShopUrl = '/shopadmin/registershop'
     alert(initUrl);
     getShopInitInfo();
     function getShopInitInfo() {
