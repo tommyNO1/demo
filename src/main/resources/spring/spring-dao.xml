@@ -10,12 +10,23 @@
     <!--配置数据库相关参数properties文件的位置-->
     <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
 
-    <!--配置数据源,配置数据库连接池-->
+<!--    &lt;!&ndash;配置数据源,配置数据库连接池&ndash;&gt;
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${jdbc.driver}"></property>
         <property name="jdbcUrl" value="${jdbc.url}"></property>
         <property name="user" value="${jdbc.username}"></property>
         <property name="password" value="${jdbc.password}"></property>
+        &lt;!&ndash;c3p0连接池私有属性&ndash;&gt;
+        <property name="maxPoolSize" value="30"></property>
+        <property name="minPoolSize" value="10"></property>
+        &lt;!&ndash;关闭连接后不自动commit&ndash;&gt;
+        <property name="autoCommitOnClose" value="false"></property>
+        <property name="checkoutTimeout" value="10000"></property>
+        <property name="acquireRetryAttempts" value="2"></property>
+    </bean>-->
+
+    <!--配置数据源,配置数据库连接池-->
+    <bean id="abstractDataSource" abstract="true" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <!--c3p0连接池私有属性-->
         <property name="maxPoolSize" value="30"></property>
         <property name="minPoolSize" value="10"></property>
@@ -23,6 +34,36 @@
         <property name="autoCommitOnClose" value="false"></property>
         <property name="checkoutTimeout" value="10000"></property>
         <property name="acquireRetryAttempts" value="2"></property>
+    </bean>
+
+    <bean id="master" parent="abstractDataSource">
+        <property name="driverClass" value="${jdbc.driver}"></property>
+        <property name="jdbcUrl" value="${jdbc.master.url}"></property>
+        <property name="user" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+
+    <bean id="slave" parent="abstractDataSource">
+        <property name="driverClass" value="${jdbc.driver}"></property>
+        <property name="jdbcUrl" value="${jdbc.slave.url}"></property>
+        <property name="user" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+
+    <!--配置动态数据袁，这里的targetDataSources就是路由数据源对应的名称 -->
+    <bean id="dynamicDataSource" class="com.o2o.dao.split.DynamicDataSource">
+        <property name="targetDataSources">
+            <map>
+                <entry value-ref="master" key="master"></entry>
+                <entry value-ref="slave" key="slave"></entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+        <property name="targetDataSource">
+            <ref bean="dynamicDataSource"/>
+        </property>
     </bean>
     <!--配置spring整合mybatis的工厂类对象-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -35,7 +76,7 @@
         <!--扫描sql配置文件:mapperLocation所需要的xml文件-->
         <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
     </bean>
-    <!--配置扫描Dao接口包，动态实现Dao街口，注入到spring容器中-->
+    <!--配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--注入sqlSessionFactory-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>

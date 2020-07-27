@@ -18,7 +18,6 @@ public class ShopDaoTest extends BaseTest {
     private ShopDao shopDao;
 
     @Test
-    @Ignore
     public void testInsertShop() {
         Shop shop = new Shop();
         PersonInfo owner = new PersonInfo();
@@ -44,6 +43,7 @@ public class ShopDaoTest extends BaseTest {
     }
 
     @Test
+    @Ignore
     public void testUpdateShop() {
         Shop shop = new Shop();
         shop.setShopId(6L);
