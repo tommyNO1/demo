@@ -1,8 +1,11 @@
 package com.o2o.entity;
 
+import lombok.Data;
+
 import java.util.Date;
 
-public class ProductImg {
+@Data
+public class ProductImg extends BaseEntity{
     private Long productImgId;
     private String imgAddr;
     private String imgDesc;
@@ -10,51 +13,5 @@ public class ProductImg {
     private Date createTime;
     private Long productID;
 
-    public Long getProductImgId() {
-        return productImgId;
-    }
 
-    public void setProductImgId(Long productImgId) {
-        this.productImgId = productImgId;
-    }
-
-    public String getImgAddr() {
-        return imgAddr;
-    }
-
-    public void setImgAddr(String imgAddr) {
-        this.imgAddr = imgAddr;
-    }
-
-    public String getImgDesc() {
-        return imgDesc;
-    }
-
-    public void setImgDesc(String imgDesc) {
-        this.imgDesc = imgDesc;
-    }
-
-    public Integer getPriority() {
-        return priority;
-    }
-
-    public void setPriority(Integer priority) {
-        this.priority = priority;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getProductID() {
-        return productID;
-    }
-
-    public void setProductID(Long productID) {
-        this.productID = productID;
-    }
 }
