@@ -18,7 +18,6 @@ public class PersonInfoServiceImpl implements PersonInfoService {
   private PersonInfoDao personInfoDao;
 
   @Override
-  //只读事务，加快查询速度
   @Transactional(readOnly = true)
   public PersonInfo getById(Long id) {
     PersonInfo personInfo = personInfoDao.queryById(id);
