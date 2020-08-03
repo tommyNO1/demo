@@ -8,9 +8,9 @@ public class CodeUtil {
     public static boolean checkVerifyCode(HttpServletRequest request) {
         String verifyCodeExpected = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         String verifyCoedActual = HttpServletRequestUtil.getString(request, "verifyCodeActual");
-        if (verifyCoedActual == null ||verifyCoedActual.equals(verifyCodeExpected)){
+        if (verifyCoedActual == null || !verifyCoedActual.equals(verifyCodeExpected)) {
             return false;
-    }
+        }
         return true;
-}
+    }
 }
