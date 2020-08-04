@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,12 +19,25 @@ public class ShopDaoTest extends BaseTest {
     private ShopDao shopDao;
 
     @Test
-    public void testQueryByShopId(){
-        long shopId=7;
+    public void testQueryShopList() {
+        Shop shopCondition = new Shop();
+        PersonInfo owner = new PersonInfo();
+        owner.setUserId(1l);
+        shopCondition.setOwner(owner);
+        List<Shop> shopList = shopDao.queryShopList(shopCondition, 0, 5);
+        int count = shopDao.queryShopCount(shopCondition);
+        System.out.println("店铺列表的大小" + shopList.size());
+        System.out.println("店铺总数"+count);
+    }
+
+    @Test
+    @Ignore
+    public void testQueryByShopId() {
+        long shopId = 7;
         Shop shop = shopDao.queryByShopId(shopId);
-        System.out.println("areaId"+shop.getArea().getAreaId());
-        System.out.println("areaName"+shop.getArea().getAreaName());
-        System.out.println("areaName"+shop.getShopImg());
+        System.out.println("areaId" + shop.getArea().getAreaId());
+        System.out.println("areaName" + shop.getArea().getAreaName());
+        System.out.println("areaName" + shop.getShopImg());
     }
 
     @Test
@@ -61,6 +75,6 @@ public class ShopDaoTest extends BaseTest {
         shop.setShopAddr("测试地址");
         shop.setLastEditTime(new Date());
         int effectedNum = shopDao.updateShop(shop);
-        assertEquals(1,effectedNum);
+        assertEquals(1, effectedNum);
     }
 }
