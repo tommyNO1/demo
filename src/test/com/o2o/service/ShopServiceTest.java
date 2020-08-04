@@ -25,14 +25,26 @@ public class ShopServiceTest extends BaseTest {
     private ShopService shopService;
 
     @Test
-    public void testModifyShop() throws ShopOperationException, FileNotFoundException{
+    public void testGetShopList() {
+        Shop shopCondition = new Shop();
+        ShopCategory shopCategory = new ShopCategory();
+        shopCategory.setShopCategoryId(1l);
+        shopCondition.setShopCategory(shopCategory);
+        ShopExecution se =shopService.getShopList(shopCondition,2,5);
+        System.out.println("店铺列表数为："+se.getShopList().size());
+        System.out.println("店铺总数为："+se.getCount());
+    }
+
+    @Test
+    @Ignore
+    public void testModifyShop() throws ShopOperationException, FileNotFoundException {
         Shop shop = new Shop();
         shop.setShopId(7L);
         shop.setShopName("一点点");
         File shopImg = new File("D:\\image\\untitled.bmp");
         InputStream inputStream = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.modifyShop(shop,inputStream,shopImg.getName());
-        System.out.println("新的图片地址="+shopExecution.getShop().getShopImg());
+        ShopExecution shopExecution = shopService.modifyShop(shop, inputStream, shopImg.getName());
+        System.out.println("新的图片地址=" + shopExecution.getShop().getShopImg());
     }
 
     @Test
@@ -59,7 +71,7 @@ public class ShopServiceTest extends BaseTest {
         shop.setCreateTime(new Date());
         File shopImg = new File("D:\\image\\bridge.png");
         InputStream inputStream = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.addShop(shop,inputStream,shopImg.getName());
+        ShopExecution shopExecution = shopService.addShop(shop, inputStream, shopImg.getName());
         assertEquals(ShopStateEnum.CHECK.getState(), shopExecution.getState());
 
     }
