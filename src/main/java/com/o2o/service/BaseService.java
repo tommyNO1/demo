@@ -9,7 +9,7 @@ public interface BaseService<T> {
 
   void updateById( T t);
 
-  void insertOne(T t);
+  void insertOne(T t) throws Exception;
 
   void deleteManyByIds(Long... ids);
 

@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/superadmin")
+@RequestMapping("/super_admin")
 public class AreaController {
     Logger logger = LoggerFactory.getLogger(AreaController.class);
     @Autowired
     private AreaService areaService;
 
-    @RequestMapping(value = "/listarea",method = RequestMethod.GET)
+    @RequestMapping(value = "/list_area",method = RequestMethod.GET)
     @ResponseBody
     private Map<String,Object> listArea(){
         logger.info("===start==");

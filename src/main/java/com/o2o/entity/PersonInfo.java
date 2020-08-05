@@ -7,6 +7,7 @@ import lombok.Data;
 public class PersonInfo extends BaseEntity{
     private Long userId;
     private String name;
+    private String password;
     private String profileImg;
     private String email;
     private String gender;
