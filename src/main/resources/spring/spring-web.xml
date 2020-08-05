@@ -29,4 +29,21 @@
     </bean>
     <!--4扫描web相关的bean-->
     <context:component-scan base-package="com.o2o.web"/>
+
+    <!--5.配置拦截器：针对全局配置 -->
+    <mvc:interceptors>
+        <!-- 使用bean直接定义在<mvc:interceptors>下面的拦截器将拦截所有请求 -->
+        <!-- 这个是全局的，当使用下面的拦截器1和拦截器2时，需要把这个拦截器注释掉 -->
+<!--        <bean class="com.o2o.web.WebInterceptor"/>-->
+<!--        &lt;!&ndash; 定义多个拦截器，顺序执行 &ndash;&gt;-->
+        <mvc:interceptor>   <!-- 拦截器1 -->
+            <mvc:mapping path="/**"/>     <!-- 配置拦截器作用的路径 /**表示拦截所有url路径包括子url路径-->
+            <mvc:exclude-mapping path="/login"/>   <!-- 配置不需要拦截器作用的路径 -->
+            <!-- 定义在<mvc:interceptor>下面的拦截器，表示匹配路径请求才进行拦截 -->
+            <bean class="com.o2o.web.WebInterceptor"></bean>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
+
 </beans>

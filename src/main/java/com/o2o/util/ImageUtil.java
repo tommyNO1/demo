@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.UUID;
 
 public class ImageUtil {
     private static String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
@@ -38,13 +39,13 @@ public class ImageUtil {
      * 处理缩略图，并返回新生成的图片相对路径
      * */
     public static String generateThumbnail(InputStream thumbnailInputStream, String fileName, String targetAddr) throws IOException {
-        String realFileName = getRandomFileName();
+        String realFileName = UUID.randomUUID().toString().replaceAll("-", "");
         String extension = getFileExtension(fileName);
         makeDirPath(targetAddr);
         String relativeAddr = targetAddr + realFileName + extension;
         logger.debug("current relativeAddr is" + relativeAddr);
-        File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
-        logger.debug("current complete addr is:" + PathUtil.getImgBasePath() + relativeAddr);
+        File dest = new File( relativeAddr);
+        logger.debug("current complete addr is:" +  relativeAddr);
         Thumbnails.of(thumbnailInputStream).size(200, 200)
                 .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "waterMark.png")), 0.25f)
                 .outputQuality(0.8f).toFile(dest);
@@ -52,7 +53,7 @@ public class ImageUtil {
     }
 
     private static void makeDirPath(String targetAddr) {
-        String realFileParentPath = PathUtil.getImgBasePath() + targetAddr;
+        String realFileParentPath =  targetAddr;
         File ditPath = new File(realFileParentPath);
         if (!ditPath.exists()) {
             ditPath.mkdirs();
@@ -64,12 +65,12 @@ public class ImageUtil {
         return fileName.substring(fileName.lastIndexOf("."));
     }
 
-    public static String getRandomFileName() {
-        //获取随机的五位数
-        int ranNum = r.nextInt(89999) + 10000;
-        String nowTimeStr = sDateFormat.format(new Date());
-        return nowTimeStr + ranNum;
-    }
+//    public static String getRandomFileName() {
+//        //获取随机的五位数
+//        int ranNum = r.nextInt(89999) + 10000;
+//        String nowTimeStr = sDateFormat.format(new Date());
+//        return nowTimeStr + ranNum;
+//    }
 
     public static void main(String[] args) throws IOException {
         Thumbnails.of(new File("D:\\image\\bridge.png"))
@@ -83,7 +84,7 @@ public class ImageUtil {
     * 如果是目录路径则删除该目录下所有的文件
     * */
     public static void deleteFileOrPath(String storePath){
-        File fileOrPath = new File(PathUtil.getImgBasePath()+storePath);
+        File fileOrPath = new File(Constance.BASE_PATH + Constance.IMAGE_PATH + storePath);
         if(fileOrPath.exists()){
             if(fileOrPath.isDirectory()){
                 File file[] = fileOrPath.listFiles();

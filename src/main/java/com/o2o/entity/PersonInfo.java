@@ -2,7 +2,6 @@ package com.o2o.entity;
 
 import lombok.Data;
 
-import java.util.Date;
 
 @Data
 public class PersonInfo extends BaseEntity{

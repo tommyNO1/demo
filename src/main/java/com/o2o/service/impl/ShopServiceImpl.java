@@ -6,13 +6,12 @@ import com.o2o.entity.Shop;
 import com.o2o.enums.ShopStateEnum;
 import com.o2o.exceptions.ShopOperationException;
 import com.o2o.service.ShopService;
+import com.o2o.util.Constance;
 import com.o2o.util.ImageUtil;
-import com.o2o.util.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -68,7 +67,7 @@ public class ShopServiceImpl implements ShopService {
         try {
             //给店铺信息赋初值
             shop.setEnableStatus(0);
-            shop.setCreateTime(new Date());
+            shop.setCreateDate(new Date());
             shop.setLastEditTime(new Date());
             //添加店铺信息
             int effectedNum = shopDao.insertShop(shop);
@@ -97,7 +96,7 @@ public class ShopServiceImpl implements ShopService {
 
     private void addShopImg(Shop shop, InputStream shopImgInputStream, String fileName) throws IOException {
         //获取shop图片目录的相对路径
-        String dest = PathUtil.getShopImagePath(shop.getShopId());
+        String dest = Constance.IMAGE_PATH + Constance.IMAGE_PATH + shop.getShopId();
         String shopImgAddr = ImageUtil.generateThumbnail(shopImgInputStream, fileName, dest);
         shop.setShopImg(shopImgAddr);
     }

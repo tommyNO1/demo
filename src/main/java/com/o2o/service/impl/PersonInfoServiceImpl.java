@@ -1,5 +1,6 @@
 package com.o2o.service.impl;
 
+
 import com.o2o.dao.PersonInfoDao;
 import com.o2o.entity.PersonInfo;
 import com.o2o.service.PersonInfoService;
@@ -16,6 +17,7 @@ public class PersonInfoServiceImpl implements PersonInfoService {
 
   @Autowired
   private PersonInfoDao personInfoDao;
+
 
   @Override
   @Transactional(readOnly = true)
@@ -47,4 +49,7 @@ public class PersonInfoServiceImpl implements PersonInfoService {
     List<PersonInfo> list = personInfoDao.getList(map);
     return list;
   }
+
+
+
 }

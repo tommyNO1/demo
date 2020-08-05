@@ -19,4 +19,9 @@ public class AreaDaoTest extends BaseTest {
         assertEquals(2,areaList.size());
         System.out.println(areaList.get(0).getAreaName());
     }
+
+    @Test
+    public void test(){
+        System.out.println(System.getProperty("user.dir"));
+    }
 }
