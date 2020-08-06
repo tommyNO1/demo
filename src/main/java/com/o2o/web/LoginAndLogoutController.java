@@ -25,6 +25,11 @@ public class LoginAndLogoutController {
     return "shop/login";
   }
 
+  /**
+   * 登陆接口
+   * @param request
+   * @throws NoSuchAlgorithmException
+   */
   @RequestMapping(value = "/login", method = {RequestMethod.POST})
   public void userLogin(HttpServletRequest request) throws NoSuchAlgorithmException {
     String email = HttpServletRequestUtil.getString(request, "email");
