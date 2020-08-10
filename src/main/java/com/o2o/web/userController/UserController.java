@@ -1,4 +1,5 @@
-package com.o2o.web;
+package com.o2o.web.userController;
+
 
 import com.o2o.entity.PersonInfo;
 import com.o2o.exceptions.ShopOperationException;
@@ -15,15 +16,15 @@ import java.security.NoSuchAlgorithmException;
 
 @Controller
 @RequestMapping("/v1/o2o/user")
-public class LoginAndLogoutController {
-
-  @Autowired
-  private PersonInfoServiceImpl personInfoService;
+public class UserController {
 
   @RequestMapping(value = "/login", method = {RequestMethod.GET})
   public String login(){
     return "shop/login";
   }
+
+  @Autowired
+  private PersonInfoServiceImpl personInfoService;
 
   /**
    * 登陆接口
@@ -55,7 +56,6 @@ public class LoginAndLogoutController {
     }
   }
 
-
   @RequestMapping(value = "/logout", method = {RequestMethod.POST})
   public void logout(HttpServletRequest request){
     String userId = HttpServletRequestUtil.getString(request, "userId");
@@ -64,5 +64,17 @@ public class LoginAndLogoutController {
     //TODO 重定向到首页或者登陆页
   }
 
+  //注册
+  @RequestMapping(value = "/sign_up", method = {RequestMethod.POST})
+  public void signUp(HttpServletRequest request) throws Exception {
+    String email = HttpServletRequestUtil.getString(request, "email");
+    String pwd = HttpServletRequestUtil.getString(request, "pwd");
+
+    PersonInfo personInfo = new PersonInfo();
+    personInfo.setEmail(email);
+    personInfo.setPassword(pwd);
+    // TODO 其他属性 .....
+    personInfoService.signUp(personInfo);
+  }
 
 }

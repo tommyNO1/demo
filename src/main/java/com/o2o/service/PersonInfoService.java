@@ -8,4 +8,6 @@ public interface PersonInfoService extends BaseService<PersonInfo> {
 
   PersonInfo validUser(String email, String pwd) throws NoSuchAlgorithmException;
 
+  void signUp(PersonInfo personInfo) throws Exception;
+
 }

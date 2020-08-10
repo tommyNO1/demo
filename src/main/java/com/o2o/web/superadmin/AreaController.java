@@ -24,7 +24,7 @@ public class AreaController {
 
     @RequestMapping(value = "/list_area",method = RequestMethod.GET)
     @ResponseBody
-    private Map<String,Object> listArea(){
+    public Map<String,Object> listArea(){
         logger.info("===start==");
         long startTime = System.currentTimeMillis();
         Map<String, Object> modelMap = new HashMap<String, Object>();

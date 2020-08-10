@@ -3,6 +3,7 @@ package com.o2o.service.impl;
 
 import com.o2o.dao.PersonInfoDao;
 import com.o2o.entity.PersonInfo;
+import com.o2o.exceptions.ShopOperationException;
 import com.o2o.service.PersonInfoService;
 import com.o2o.util.EncodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,4 +67,16 @@ public class PersonInfoServiceImpl implements PersonInfoService {
     PersonInfo personInfo = personInfoDao.validUser(email, encodePwd);
     return personInfo;
   }
+
+  @Override
+  public void signUp(PersonInfo personInfo) throws Exception {
+    PersonInfo userWithEmail = personInfoDao.findUserWithEmail(personInfo.getEmail());
+    if (userWithEmail != null){
+      throw new ShopOperationException("this email has been used");
+    }
+    String encodePwd = EncodeUtil.SHA256(personInfo.getPassword());
+    personInfo.setPassword(encodePwd);
+    personInfoDao.insert(personInfo);
+  }
+
 }
