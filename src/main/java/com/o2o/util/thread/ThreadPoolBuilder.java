@@ -1,7 +1,9 @@
-package com.o2o.thread;
+package com.o2o.util.thread;
 
-import com.o2o.thread.runnable.DefaulRejectExecutionHandler;
+import com.o2o.util.thread.runnable.DefaulRejectExecutionHandler;
+import com.o2o.util.thread.runnable.DefaultExecutorService;
 
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.TimeUnit;
@@ -31,7 +33,7 @@ public class ThreadPoolBuilder {
   /**
    * 线程名
    */
-  private String                   groupName       = "xlink-pool";
+  private String                   groupName       = "default-pool";
   /**
    * 拒接处理
    */
@@ -60,7 +62,18 @@ public class ThreadPoolBuilder {
   public DefaultExecutorService unlimitQueueBuilder() {
     buildCheck();
     return new DefaultExecutorService(corePoolSize, maximumPoolSize, keepAliveTime,
-            unit, new LinkedBlockingDeque<>(), new XlinkThreadFactory(groupName), rejectHandler, useMetric, groupName);
+            unit, new LinkedBlockingDeque<>(), new DefaultThreadFactory(groupName), rejectHandler, useMetric, groupName);
+  }
+
+  /**
+   * 建立有界的线程池
+   *
+   * @return
+   */
+  public DefaultExecutorService limitQueueBuilder() {
+    buildCheck();
+    return new DefaultExecutorService(corePoolSize, maximumPoolSize, keepAliveTime,
+            unit, new ArrayBlockingQueue<>(workQueueSize), new DefaultThreadFactory(groupName), rejectHandler, useMetric, groupName);
   }
 
 
@@ -88,22 +101,22 @@ public class ThreadPoolBuilder {
     return this;
   }
 
-  public XlinkThreadPoolBuilder withWorkQueueSize(int workQueueSize) {
+  public ThreadPoolBuilder withWorkQueueSize(int workQueueSize) {
     this.workQueueSize = workQueueSize;
     return this;
   }
 
-  public XlinkThreadPoolBuilder withGroupName(String groupName) {
+  public ThreadPoolBuilder withGroupName(String groupName) {
     this.groupName = groupName;
     return this;
   }
 
-  public XlinkThreadPoolBuilder withRejectHandler(RejectedExecutionHandler rejectHandler) {
+  public ThreadPoolBuilder withRejectHandler(RejectedExecutionHandler rejectHandler) {
     this.rejectHandler = rejectHandler;
     return this;
   }
 
-  public XlinkThreadPoolBuilder withUseMetric(boolean useMetric) {
+  public ThreadPoolBuilder withUseMetric(boolean useMetric) {
     this.useMetric = useMetric;
     return this;
   }

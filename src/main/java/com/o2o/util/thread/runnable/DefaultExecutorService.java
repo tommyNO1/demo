@@ -1,10 +1,14 @@
-package com.o2o.thread.runnable;
+package com.o2o.util.thread.runnable;
 
-import com.o2o.thread.innerException.InnerCommonException;
+import com.o2o.util.thread.innerException.InnerCommonException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.*;
 
-public class DefalutExecutorService extends ThreadPoolExecutor{
+public class DefaultExecutorService extends ThreadPoolExecutor{
+  Logger logger = LoggerFactory.getLogger(DefaultExecutorService.class);
+
   private static ScheduledExecutorService scheduleService = Executors.newSingleThreadScheduledExecutor();
 
   /**
@@ -14,13 +18,13 @@ public class DefalutExecutorService extends ThreadPoolExecutor{
 
   private String groupName;
 
-  public XlinkExecutorService(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory, RejectedExecutionHandler handler, boolean userMetric, String groupName) {
+  public DefaultExecutorService(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory, RejectedExecutionHandler handler, boolean userMetric, String groupName) {
     super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory, handler);
     this.isMetric = userMetric;
     this.groupName = groupName;
     if (isMetric) {
       scheduleService.scheduleAtFixedRate(() -> {
-        XLOG.info("thread pool statistics: groupName={},coreSize={},currentSize={},queueSize={}", this.groupName, this.getCorePoolSize(), this.getPoolSize(), this.getQueue().size());
+        logger.info("thread pool statistics: groupName={},coreSize={},currentSize={},queueSize={}", this.groupName, this.getCorePoolSize(), this.getPoolSize(), this.getQueue().size());
       }, 0, 60, TimeUnit.SECONDS);
 
     }
@@ -29,10 +33,10 @@ public class DefalutExecutorService extends ThreadPoolExecutor{
   /**
    * 执行自定义的Runnable类
    *
-   * @param xlinkRunnable
+   * @param defaultRunnable
    */
-  public void execute(XlinkRunnable xlinkRunnable) {
-    super.execute(xlinkRunnable);
+  public void execute(DefaultRunnable defaultRunnable) {
+    super.execute(defaultRunnable);
   }
 
 

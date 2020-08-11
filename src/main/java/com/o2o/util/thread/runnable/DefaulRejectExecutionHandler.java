@@ -1,4 +1,4 @@
-package com.o2o.thread.runnable;
+package com.o2o.util.thread.runnable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
