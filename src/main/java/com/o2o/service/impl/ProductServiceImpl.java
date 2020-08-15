@@ -42,24 +42,24 @@ public class ProductServiceImpl implements ProductService {
             //默认为上架状态
             product.setEnableStatus(1);
             //若商品缩略图不为空则进行添加
-            if(thumbnail != null){
-                addThumbnail(product,thumbnail);
+            if (thumbnail != null) {
+                addThumbnail(product, thumbnail);
             }
             try {
                 //创建商品信息
                 int effectedNum = productDao.insertProduct(product);
-                if(effectedNum<=0){
+                if (effectedNum <= 0) {
                     throw new ProductOperationException("创建商品失败");
                 }
-            }catch (Exception e){
-                throw new ProductOperationException("创建商品失败："+e.getMessage());
+            } catch (Exception e) {
+                throw new ProductOperationException("创建商品失败：" + e.getMessage());
             }
             //若商品详情图不为空则添加
-            if(productImgList!=null&&productImgList.size()>0){
-                addProductImgList(product,productImgList);
+            if (productImgList != null && productImgList.size() > 0) {
+                addProductImgList(product, productImgList);
             }
-            return new ProductExecution(ProductStateEnum.SUCCESS,product);
-        }else {
+            return new ProductExecution(ProductStateEnum.SUCCESS, product);
+        } else {
             //传参数为空则返回空值错误信息
             return new ProductExecution(ProductStateEnum.EMPTY);
         }
@@ -70,8 +70,8 @@ public class ProductServiceImpl implements ProductService {
         String dest = PathUtil.getShopImagePath(product.getShop().getShopId());
         List<ProductImg> productImgList = new ArrayList<>();
         //遍历图片一次去处理，并添加进productImg实体类里
-        for(ImageHolder productImg:productImgHolderList){
-            String imgAddr = ImageUtil.generateNormalImg(productImg,dest);
+        for (ImageHolder productImg : productImgHolderList) {
+            String imgAddr = ImageUtil.generateNormalImg(productImg, dest);
             ProductImg productImgTemp = new ProductImg();
             productImgTemp.setImgAddr(imgAddr);
             productImgTemp.setProductId(product.getProductId());
@@ -79,21 +79,21 @@ public class ProductServiceImpl implements ProductService {
             productImgList.add(productImgTemp);
         }
         //如果确实有图片需要添加，就执行批量添加操作
-        if(productImgList.size()>0){
+        if (productImgList.size() > 0) {
             try {
                 int effectedNum = productImgDao.batchInsertProductImg(productImgList);
-                if(effectedNum<=0){
+                if (effectedNum <= 0) {
                     throw new ProductOperationException("创建商品详情图失败");
                 }
-            }catch (Exception e){
-                throw new ProductOperationException("创建商品详情图失败"+e.getMessage());
+            } catch (Exception e) {
+                throw new ProductOperationException("创建商品详情图失败" + e.getMessage());
             }
         }
     }
 
     private void addThumbnail(Product product, ImageHolder thumbnail) {
         String dest = PathUtil.getShopImagePath(product.getShop().getShopId());
-        String thumbnailAddr = ImageUtil.generateThumbnail(thumbnail,dest);
+        String thumbnailAddr = ImageUtil.generateThumbnail(thumbnail, dest);
         product.setImgAddr(thumbnailAddr);
     }
 
