@@ -10,4 +10,9 @@ public interface ProductImgDao {
     * 批量添加商品图片
     * */
     int batchInsertProductImg(List<ProductImg> productImgList);
+
+    /*
+    * 删除商品图片
+    * */
+    int deleteProductImgByProductId(long productId);
 }
