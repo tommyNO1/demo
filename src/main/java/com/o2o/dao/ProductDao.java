@@ -9,4 +9,18 @@ public interface ProductDao {
     * @Return effectedNum
     * */
     int insertProduct(Product product);
+
+    /*
+    * 查询商品信息
+    * @Param productId
+    * @Return product
+    * */
+    Product queryProductById(long productId);
+
+    /*
+    * 更新商品信息
+    * @Param product
+    * @Return effectedNum
+    * */
+    int updateProduct(Product product);
 }

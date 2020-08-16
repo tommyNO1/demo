@@ -3,11 +3,15 @@ package com.o2o.dao;
 import com.o2o.BaseTest;
 import com.o2o.entity.Product;
 import com.o2o.entity.ProductCategory;
+import com.o2o.entity.ProductImg;
 import com.o2o.entity.Shop;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,7 +19,10 @@ public class ProductDaoTest extends BaseTest {
     @Autowired
     private ProductDao productDao;
 
+    @Autowired ProductImgDao productImgDao;
+
     @Test
+    @Ignore
     public void testAInsertProduct() throws Exception{
         Shop shop1 = new Shop();
         shop1.setShopId(7L);
@@ -61,4 +68,51 @@ public class ProductDaoTest extends BaseTest {
         effectedNum = productDao.insertProduct(product3);
         assertEquals(1,effectedNum);
     }
+    @Test
+    @Ignore
+    public void testCQueryProductByProductId() throws Exception {
+        long productId = 4;
+        // 初始化两个商品详情图实例作为productId为1的商品下的详情图片
+        // 批量插入到商品详情图表中
+        ProductImg productImg1 = new ProductImg();
+        productImg1.setImgAddr("图片1");
+        productImg1.setImgDesc("测试图片1");
+        productImg1.setPriority(1);
+        productImg1.setCreateTime(new Date());
+        productImg1.setProductId(productId);
+        ProductImg productImg2 = new ProductImg();
+        productImg2.setImgAddr("图片2");
+        productImg2.setPriority(1);
+        productImg2.setCreateTime(new Date());
+        productImg2.setProductId(productId);
+        List<ProductImg> productImgList = new ArrayList<ProductImg>();
+        productImgList.add(productImg1);
+        productImgList.add(productImg2);
+        int effectedNum = productImgDao.batchInsertProductImg(productImgList);
+        assertEquals(2, effectedNum);
+        // 查询productId为1的商品信息并校验返回的详情图实例列表size是否为2
+        Product product = productDao.queryProductById(productId);
+        assertEquals(2, product.getProductImgList().size());
+        // 删除新增的这两个商品详情图实例
+        effectedNum = productImgDao.deleteProductImgByProductId(productId);
+        assertEquals(2, effectedNum);
+    }
+
+    @Test
+    public void testDUpdateProduct(){
+        Shop shop = new Shop();
+        shop.setShopId(7l);
+        ProductCategory productCategory = new ProductCategory();
+        productCategory.setProductCategoryId(2l);
+        Product product = new Product();
+        product.setProductId(5l);
+        product.setShop(shop);
+        product.setProductCategory(productCategory);
+        product.setNormalPrice("50");
+        product.setPromotionPrice("49");
+        product.setLastEditTime(new Date());
+        int effectedNum = productDao.updateProduct(product);
+        assertEquals(1,effectedNum);
+    }
+
 }
