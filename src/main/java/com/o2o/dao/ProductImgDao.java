@@ -15,4 +15,10 @@ public interface ProductImgDao {
     * 删除商品图片
     * */
     int deleteProductImgByProductId(long productId);
+
+    /*
+    * 获取商品图片列表
+    * */
+    List<ProductImg> queryProductImgList(long productId);
+
 }

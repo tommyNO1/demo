@@ -14,10 +14,28 @@ public interface ProductService {
      * 添加商品信息以及图片处理
      * @param product
      * @param thumbnail
-     * @param productImgs
+     * @param productImgList
      * @return
      * @throws ProductOperationException
      * */
     ProductExecution addProduct(Product product, ImageHolder thumbnail,
                                 List<ImageHolder> productImgList) throws ProductOperationException;
+
+    /*
+     * 通过商品id查询商品信息
+     * @param productId
+     * @return product
+     * */
+    Product getProductById(long productId);
+
+    /*
+     * 修改商品信息以及图片处理
+     * @param product
+     * @param thumbnail
+     * @param productImgList
+     * @return ProductExecution
+     * @trows ProductOperationException
+     * */
+    ProductExecution modifyProduct(Product product, ImageHolder thumbnail,
+                                   List<ImageHolder> productImgList) throws ProductOperationException;
 }
