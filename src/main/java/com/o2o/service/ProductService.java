@@ -38,4 +38,13 @@ public interface ProductService {
      * */
     ProductExecution modifyProduct(Product product, ImageHolder thumbnail,
                                    List<ImageHolder> productImgList) throws ProductOperationException;
+
+    /*
+     * 查询商品列表并分页，可输入的条件有：商品名，商品状态，店铺id，店铺类别
+     * @param productCondition
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     * */
+    ProductExecution getProductList(Product productCondition, int pageIndex, int pageSize);
 }

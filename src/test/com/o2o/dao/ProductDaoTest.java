@@ -99,6 +99,7 @@ public class ProductDaoTest extends BaseTest {
     }
 
     @Test
+    @Ignore
     public void testDUpdateProduct(){
         Shop shop = new Shop();
         shop.setShopId(7l);
@@ -113,6 +114,19 @@ public class ProductDaoTest extends BaseTest {
         product.setLastEditTime(new Date());
         int effectedNum = productDao.updateProduct(product);
         assertEquals(1,effectedNum);
+    }
+
+    @Test
+    public void testBQueryProductList() throws Exception{
+        Product productCondition = new Product();
+        List<Product> productList = productDao.queryProductList(productCondition,1,3);
+        System.out.println(productList.size());
+        System.out.println(productList.get(0).getProductName());
+        int count = productDao.queryProductCount(productCondition);
+        System.out.println(count);
+        productCondition.setProductName("test");
+        productList = productDao.queryProductList(productCondition,0,5);
+        System.out.println(productList.size());
     }
 
 }
