@@ -58,7 +58,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         }catch (Exception e){
             throw new ProductCategoryOperationException("delete product category error:"+e.getMessage());
         }
-        //TODO 将此商品类别下的商品类别Id置为空
+        //删除操作
         try {
             int effectedNum = productCategoryDao.deleteProductCategory(productCategoryId, shopId);
             if (effectedNum <= 0) {
