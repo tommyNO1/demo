@@ -129,4 +129,10 @@ public class ProductDaoTest extends BaseTest {
         System.out.println(productList.size());
     }
 
+    @Test
+    public void testUpdateProductCategoryToNull(){
+        int effectedNum = productDao.updateProductCategoryToNull(9);
+        assertEquals(1,effectedNum);
+    }
+
 }
