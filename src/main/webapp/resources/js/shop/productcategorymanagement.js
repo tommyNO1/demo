@@ -1,7 +1,7 @@
 $(function () {
-    var listUrl = '/shopadmin/getproductcategorylist';
-    var addUrl = '/shopadmin/addproductcategories';
-    var deleteUrl = '/shopadmin/removeproductcategory';
+    var listUrl = '/fleamarket/shopadmin/getproductcategorylist';
+    var addUrl = '/fleamarket/shopadmin/addproductcategories';
+    var deleteUrl = '/fleamarket/shopadmin/removeproductcategory';
     getList();
 
     function getList() {

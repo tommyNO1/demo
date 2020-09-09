@@ -1,6 +1,6 @@
 $(function () {
     var shopId = getQueryString('shopId');
-    var shopInfoUrl = '/shopadmin/getshopmanagementinfo?shopId=' + shopId;
+    var shopInfoUrl = '/fleamarket/shopadmin/getshopmanagementinfo?shopId=' + shopId;
     $.getJSON(shopInfoUrl, function (data) {
         if (data.redirect) {
             window.location.herf = data.url;
@@ -9,6 +9,6 @@ $(function () {
                 shopId = data.shopId;
             }
         }
-        $('#shopInfo').attr('href','/shopadmin/shopoperation?shopId='+shopId);
+        $('#shopInfo').attr('href','/fleamarket/shopadmin/shopoperation?shopId='+shopId);
     });
 });

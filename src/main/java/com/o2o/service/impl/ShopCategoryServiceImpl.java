@@ -15,6 +15,6 @@ public class ShopCategoryServiceImpl implements ShopCategoryService {
 
     @Override
     public List<ShopCategory> getShopCategoryList(ShopCategory shopCategoryCondition) {
-        return shopCategoryDao.queryShopCategory(new ShopCategory());
+        return shopCategoryDao.queryShopCategory(shopCategoryCondition);
     }
 }
