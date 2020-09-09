@@ -10,7 +10,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -77,12 +76,6 @@ public class ImageUtil {
         return nowTimeStr + ranNum;
     }
 
-    public static void main(String[] args) throws IOException {
-        Thumbnails.of(new File("D:\\image\\bridge.png"))
-                .size(200, 200)
-                .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/waterMark.png")), 0.25f)
-                .toFile("D:\\image\\bridgeNew.png");
-    }
     /*
     * storePath是文件路径还是目录路径，
     * 如果是文件路径则删除该文件
