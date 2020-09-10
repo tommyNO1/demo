@@ -31,6 +31,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
+    @Transactional
     public ShopExecution modifyShop(Shop shop, ImageHolder shopImg) throws ShopOperationException {
 
         if (shop == null || shop.getShopId() == null) {

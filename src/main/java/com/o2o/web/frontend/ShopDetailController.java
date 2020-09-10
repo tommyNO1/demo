@@ -34,7 +34,7 @@ public class ShopDetailController {
      * @param request
      * @return modelMap
      * */
-    @RequestMapping(value = "/listdetailpageinfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/listshopdetailpageinfo", method = RequestMethod.GET)
     @ResponseBody
     private Map<String, Object> listShopDetailPageInfo(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<>();
