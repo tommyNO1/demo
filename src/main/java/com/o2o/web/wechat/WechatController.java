@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @Controller
-@RequestMapping("wechar")
+@RequestMapping("wechat")
 public class WechatController {
     private static Logger log = LoggerFactory.getLogger(WechatController.class);
 
