@@ -11,7 +11,16 @@ public class PersonInfo {
     private Integer enableStatus;
     //1.顾客 2.店家 3.超级管理员
     private Integer userType;
-    private Date creatTime;
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    private Date createTime;
     private Date lastEditTime;
 
     public Long getUserId() {
@@ -70,13 +79,6 @@ public class PersonInfo {
         this.userType = userType;
     }
 
-    public Date getCreatTime() {
-        return creatTime;
-    }
-
-    public void setCreatTime(Date creatTime) {
-        this.creatTime = creatTime;
-    }
 
     public Date getLastEditTime() {
         return lastEditTime;
