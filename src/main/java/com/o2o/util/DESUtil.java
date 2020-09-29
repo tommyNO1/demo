@@ -94,7 +94,7 @@ public class DESUtil {
 
 	public static void main(String[] args) {
 		System.out.println(getEncryptString("work"));
-		System.out.println(getEncryptString("YUANzm12!"));
+		System.out.println(getEncryptString("mysql_work"));
 	}
 
 }
