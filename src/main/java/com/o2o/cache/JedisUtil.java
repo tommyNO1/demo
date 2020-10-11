@@ -1,10 +1,8 @@
 package com.o2o.cache;
 
-
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.util.SafeEncoder;
-
 import java.util.Set;
 
 public class JedisUtil {
